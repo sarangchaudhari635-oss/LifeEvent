@@ -182,12 +182,9 @@ For complete environment configuration, Docker workflows, and troubleshooting, r
 
 ---
 
-## 6. Project & Team Information
+## 6. Project
 
 - **Project:** LifeEvent AI
-- **Hackathon:** Paytm AI Hackathon (Build for India), Pune
-- **Problem Statement:** PS-2: *AI-Powered Financial Journeys*
-- **Team:** Crazy Coders (Sarang Chaudhari, Sumit Kalr, Sanskar Thorat)
 - **Repository Guidelines:** See [`CONTRIBUTING.md`](CONTRIBUTING.md) for code rules and commit standards.
 - **Historical Audit:** See [`README(1).md`](README(1).md) and [`docs/audit/DOCUMENTATION_INVENTORY.md`](docs/audit/DOCUMENTATION_INVENTORY.md).
 
