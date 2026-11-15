@@ -1,5 +1,6 @@
 import asyncio
 import json
+import os
 from datetime import datetime
 from typing import Dict, Any, List
 from fastapi import FastAPI, HTTPException, Request, Depends
@@ -23,9 +24,21 @@ app = FastAPI(
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
+raw_origins = os.getenv("ALLOWED_ORIGINS", "")
+if raw_origins and raw_origins.strip() != "*":
+    origins = [o.strip() for o in raw_origins.split(",") if o.strip()]
+else:
+    origins = [
+        "https://frontend-4xu98zrlm-sarangchaudhari635-oss-projects.vercel.app",
+        "https://paytm-lifeevent-ai.vercel.app",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -111,6 +124,16 @@ def init_demo_journeys():
         JOURNEY_STORE[j_id] = res
 
 init_demo_journeys()
+
+@app.get("/")
+def root():
+    return {
+        "service": "LifeEvent AI Backend Engine",
+        "version": "1.0.0",
+        "status": "online",
+        "docs_url": "/docs",
+        "health_url": "/api/health"
+    }
 
 @app.get("/api/health")
 def health_check():
