@@ -1,7 +1,7 @@
 # ==============================================================================
-# LifeEvent AI - Backend Directory Dockerfile (Render with context ./backend)
+# LifeEvent AI - Production Backend Dockerfile
 # ==============================================================================
-FROM python:3.11-slim as builder
+FROM python:3.11-slim
 
 WORKDIR /app
 
@@ -11,21 +11,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir --user -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-FROM python:3.11-slim
-
-WORKDIR /app
-
-COPY --from=builder /root/.local /root/.local
-ENV PATH=/root/.local/bin:$PATH
 ENV PYTHONPATH=/app
 
 COPY app /app/backend/app
 COPY migrations /app/backend/migrations
-
-RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
-USER appuser
 
 EXPOSE 8000
 
