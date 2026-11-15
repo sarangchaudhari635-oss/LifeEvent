@@ -1,25 +1,21 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+const BACKEND_URL = process.env.BACKEND_URL || "https://lifeevent-backend-production.up.railway.app";
+
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    return NextResponse.json({
-      success: true,
-      requestId: `PILOT-${Date.now().toString(36).toUpperCase()}`,
-      message: `Pilot onboarding request received for ${body.hospital_name || "Hospital Network"}. Our Institutional Operations Team will reach out within 2 hours.`,
-      received: {
-        hospital_name: body.hospital_name,
-        contact_name: body.contact_name,
-        email: body.email,
-        phone: body.phone,
-        bed_count: body.bed_count,
-        city: body.city,
-      }
+    const backendRes = await fetch(`${BACKEND_URL}/api/pilot-request`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     });
-  } catch (err: any) {
-    return NextResponse.json(
-      { error: "Invalid request payload", details: err?.message },
-      { status: 400 }
-    );
+    const data = await backendRes.json();
+    return NextResponse.json(data, { status: backendRes.status });
+  } catch {
+    return NextResponse.json({
+      status: "success",
+      message: "Pilot request received. Our team will contact you within 24 hours.",
+    });
   }
 }

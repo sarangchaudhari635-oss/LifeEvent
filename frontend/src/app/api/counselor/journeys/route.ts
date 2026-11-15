@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 
-const COUNSELOR_JOURNEYS = [
+const BACKEND_URL = process.env.BACKEND_URL || "https://lifeevent-backend-production.up.railway.app";
+
+const FALLBACK_JOURNEYS = [
   {
     id: "demo-journey-cardiac-01",
     patient_name: "Ramesh Kulkarni",
@@ -11,7 +13,7 @@ const COUNSELOR_JOURNEYS = [
     current_stage: "preauth_pending",
     next_action: "Submit Patient Aadhaar and Signed Form Part B to Hospital Insurance Desk (Counter #4)",
     tasks_done: 1,
-    tasks_total: 3
+    tasks_total: 3,
   },
   {
     id: "demo-journey-ortho-02",
@@ -23,10 +25,19 @@ const COUNSELOR_JOURNEYS = [
     current_stage: "admitted",
     next_action: "Upload implant vendor invoice for TPA cashless clearance",
     tasks_done: 2,
-    tasks_total: 2
-  }
+    tasks_total: 2,
+  },
 ];
 
 export async function GET() {
-  return NextResponse.json(COUNSELOR_JOURNEYS);
+  try {
+    const backendRes = await fetch(`${BACKEND_URL}/api/counselor/journeys`, {
+      next: { revalidate: 10 },
+    });
+    if (!backendRes.ok) throw new Error(`Backend ${backendRes.status}`);
+    const data = await backendRes.json();
+    return NextResponse.json(data);
+  } catch {
+    return NextResponse.json(FALLBACK_JOURNEYS);
+  }
 }

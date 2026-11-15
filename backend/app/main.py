@@ -2,8 +2,8 @@ import asyncio
 import json
 import os
 from datetime import datetime
-from typing import Dict, Any, List
-from fastapi import FastAPI, HTTPException, Request, Depends
+from typing import Dict, Any, List, Optional
+from fastapi import FastAPI, HTTPException, Request, Depends, UploadFile, File, Form
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from slowapi import Limiter, _rate_limit_exceeded_handler
@@ -14,6 +14,8 @@ from backend.app.models.schemas import LifeEventIntake, LivingJourney
 from backend.app.agents.graph import build_lifeevent_graph
 from backend.app.sample_data.fixtures import SCENARIO_CARDIAC, SCENARIO_ORTHOPEDIC, TPA_QUERY_UPDATE_FIXTURE
 from backend.app.core.security import sanitize_logs, mask_aadhaar
+from backend.app.core.voice import transcribe_audio
+
 
 limiter = Limiter(key_func=get_remote_address)
 app = FastAPI(
@@ -143,6 +145,40 @@ def health_check():
         "timestamp": datetime.now().isoformat(),
         "active_journeys": len(JOURNEY_STORE)
     }
+
+@app.get("/api/voice/status")
+def voice_service_status():
+    """Returns Sarvam AI speech engine configuration status."""
+    has_key = bool(os.getenv("SARVAM_API_KEY"))
+    return {
+        "provider": "Sarvam AI",
+        "model": os.getenv("SARVAM_STT_MODEL", "saaras:v3"),
+        "configured": has_key,
+        "languages": ["hi-IN", "mr-IN", "en-IN", "auto"]
+    }
+
+@app.post("/api/voice/transcribe")
+@limiter.limit("30/minute")
+async def transcribe_voice(
+    request: Request,
+    file: UploadFile = File(...),
+    language_code: Optional[str] = Form(None)
+):
+    """
+    Transcribes spoken voice audio in Indian languages (Hindi, Marathi, English)
+    using Sarvam AI Speech-to-Text (saaras:v3).
+    """
+    audio_bytes = await file.read()
+    if not audio_bytes:
+        raise HTTPException(status_code=400, detail="Empty audio file uploaded")
+    
+    result = await transcribe_audio(
+        audio_bytes=audio_bytes,
+        filename=file.filename or "recording.webm",
+        content_type=file.content_type or "audio/webm",
+        language_code=language_code
+    )
+    return result
 
 @app.post("/api/journey/intake")
 @limiter.limit("30/minute")

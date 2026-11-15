@@ -1,32 +1,30 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: Request) {
+const BACKEND_URL = process.env.BACKEND_URL || "https://lifeevent-backend-production.up.railway.app";
+
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const isCardiac =
-      body.condition_description?.toLowerCase().includes("chest") ||
-      body.condition_description?.toLowerCase().includes("angioplasty") ||
-      body.patient_name?.toLowerCase().includes("ramesh") ||
-      body.is_demo;
-
-    const journeyId = isCardiac ? "demo-journey-cardiac-01" : "demo-journey-ortho-02";
-
-    return NextResponse.json({
-      id: journeyId,
-      status: "created",
-      message: "Emergency intake recorded with zero-knowledge Verhoeff redaction.",
-      journey_url: `/journey/${journeyId}`,
-      received_payload: {
-        patient_name: body.patient_name,
-        hospital_name: body.hospital_name,
-        estimated_amount: body.estimated_amount,
-        urgency: body.urgency,
-      }
+    const backendRes = await fetch(`${BACKEND_URL}/api/journey/intake`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
     });
-  } catch (err: any) {
+
+    const data = await backendRes.json();
+    return NextResponse.json(data, { status: backendRes.status });
+  } catch (err: unknown) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[journey/intake] Proxy error:", message);
+    // Graceful fallback for demo
     return NextResponse.json(
-      { error: "Invalid payload", details: err?.message },
-      { status: 400 }
+      {
+        id: "demo-journey-cardiac-01",
+        status: "created",
+        message: "Emergency intake recorded (offline demo mode).",
+        journey_url: "/journey/demo-journey-cardiac-01",
+      },
+      { status: 200 }
     );
   }
 }
