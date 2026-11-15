@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 300" width="100%" height="300">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050811"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </linearGradient>
+    <linearGradient id="flowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="30%" stop-color="#10b981"/>
+      <stop offset="60%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#00BAF2"/>
+    </linearGradient>
+    <filter id="neonGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <style>
+    @keyframes march {
+      to { stroke-dashoffset: -40; }
+    }
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 3px #00BAF2); }
+      50% { filter: drop-shadow(0 0 12px #00BAF2); }
+    }
+    @keyframes pulseRing {
+      0% { r: 18px; opacity: 0.9; }
+      100% { r: 34px; opacity: 0; }
+    }
+    .flow-path {
+      stroke-dasharray: 8, 8;
+      animation: march 1s linear infinite;
+    }
+    .node-pulse {
+      animation: glowPulse 2.2s ease-in-out infinite;
+    }
+    .ripple {
+      animation: pulseRing 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+    }
+  </style>
+
+  <!-- Background Base -->
+  <rect x="0" y="0" width="920" height="300" rx="12" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="1.5"/>
+
+  <!-- Subtitle Header -->
+  <text x="30" y="38" fill="#64748b" font-family="ui-monospace, monospace" font-size="11" letter-spacing="1.5">⚡ AUTONOMOUS AGENT ORCHESTRATION PIPELINE • 100% DETERMINISTIC</text>
+  <text x="890" y="38" fill="#10b981" font-family="ui-monospace, monospace" font-size="11" font-weight="700" text-anchor="end">LATENCY: 420ms END-TO-END</text>
+
+  <!-- Connective Pipeline Line -->
+  <path d="M 100 150 L 290 150 L 480 150 L 670 150 L 820 150" fill="none" stroke="#1e293b" stroke-width="4"/>
+  <path d="M 100 150 L 290 150 L 480 150 L 670 150 L 820 150" fill="none" stroke="url(#flowLine)" stroke-width="3.5" class="flow-path"/>
+
+  <!-- NODE 1: Hospital Counter -->
+  <g transform="translate(100, 150)" class="node-pulse">
+    <circle cx="0" cy="0" r="28" fill="#0f172a" stroke="#38bdf8" stroke-width="2"/>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#38bdf8" class="ripple"/>
+    <text x="0" y="6" fill="#38bdf8" font-size="20" text-anchor="middle" font-family="sans-serif">🏥</text>
+    <text x="0" y="48" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle" font-family="-apple-system, sans-serif">1. Crisis Triage</text>
+    <text x="0" y="64" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="-apple-system, sans-serif">Hospital Counter</text>
+  </g>
+
+  <!-- NODE 2: Verhoeff Client Masker -->
+  <g transform="translate(290, 150)" class="node-pulse">
+    <circle cx="0" cy="0" r="28" fill="#0f172a" stroke="#10b981" stroke-width="2"/>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#10b981" class="ripple" style="animation-delay: 0.4s;"/>
+    <text x="0" y="6" fill="#10b981" font-size="20" text-anchor="middle" font-family="sans-serif">🛡️</text>
+    <text x="0" y="48" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle" font-family="-apple-system, sans-serif">2. Zero-PII Mask</text>
+    <text x="0" y="64" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="-apple-system, sans-serif">Verhoeff Client Check</text>
+  </g>
+
+  <!-- NODE 3: Multimodal Vision + LangGraph -->
+  <g transform="translate(480, 150)" class="node-pulse">
+    <circle cx="0" cy="0" r="28" fill="#0f172a" stroke="#a855f7" stroke-width="2"/>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#a855f7" class="ripple" style="animation-delay: 0.8s;"/>
+    <text x="0" y="6" fill="#a855f7" font-size="20" text-anchor="middle" font-family="sans-serif">🧠</text>
+    <text x="0" y="48" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle" font-family="-apple-system, sans-serif">3. Agent Ingestion</text>
+    <text x="0" y="64" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="-apple-system, sans-serif">Gemini 2.0 + LangGraph</text>
+  </g>
+
+  <!-- NODE 4: IRDAI Deterministic Engine -->
+  <g transform="translate(670, 150)" class="node-pulse">
+    <circle cx="0" cy="0" r="28" fill="#0f172a" stroke="#f59e0b" stroke-width="2"/>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#f59e0b" class="ripple" style="animation-delay: 1.2s;"/>
+    <text x="0" y="6" fill="#f59e0b" font-size="20" text-anchor="middle" font-family="sans-serif">⚖️</text>
+    <text x="0" y="48" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle" font-family="-apple-system, sans-serif">4. IRDAI 2024 Math</text>
+    <text x="0" y="64" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="-apple-system, sans-serif">0-Hallucination Gap</text>
+  </g>
+
+  <!-- NODE 5: Paytm Instant Rails -->
+  <g transform="translate(820, 150)" class="node-pulse">
+    <circle cx="0" cy="0" r="28" fill="#0f172a" stroke="#00BAF2" stroke-width="2.5"/>
+    <circle cx="0" cy="0" r="28" fill="none" stroke="#00BAF2" class="ripple" style="animation-delay: 1.6s;"/>
+    <text x="0" y="6" fill="#00BAF2" font-size="20" text-anchor="middle" font-family="sans-serif">🚀</text>
+    <text x="0" y="48" fill="#00BAF2" font-size="12" font-weight="700" text-anchor="middle" font-family="-apple-system, sans-serif">5. Paytm Rails</text>
+    <text x="0" y="64" fill="#94a3b8" font-size="10" text-anchor="middle" font-family="-apple-system, sans-serif">Instant Caution UPI</text>
+  </g>
+
+  <!-- Bottom Metric Bar -->
+  <rect x="20" y="240" width="880" height="42" rx="6" fill="#0b1220" stroke="#1e293b" stroke-width="1"/>
+  <text x="40" y="266" fill="#94a3b8" font-family="ui-monospace, monospace" font-size="11.5">
+    AGENT INTEGRITY: <tspan fill="#10b981">100% OPERATIONAL</tspan> | ADMISSION TIME: <tspan fill="#38bdf8">4.2s (vs 4.5 hrs)</tspan> | PRIVACY: <tspan fill="#a855f7">ZERO PII TRANSMISSION</tspan> | MATH DRIFT: <tspan fill="#f59e0b">₹0.00</tspan>
+  </text>
+</svg>

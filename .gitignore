@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# Environment Files (Keep .env.example, ignore actual credentials)
+.env
+.env.*
+!.env.example
+*.env.local
+
+# Build & Cache
+.next/
+dist/
+build/
+screenshots/
+.pytest_cache/
+.DS_Store
+Thumbs.db
+

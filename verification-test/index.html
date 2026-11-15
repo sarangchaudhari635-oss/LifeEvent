@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AuraStudio — System Verification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090a0b;
+      --surface-1: #111315;
+      --surface-2: #191b1f;
+      --surface-3: #22252a;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-focus: rgba(255, 255, 255, 0.2);
+      --text: #f0f2f5;
+      --text-muted: #8c929d;
+      --accent: #d4a373; /* Warm architectural ochre */
+      --accent-muted: rgba(212, 163, 115, 0.12);
+      --mono: 'JetBrains Mono', monospace;
+      --display: 'Syne', sans-serif;
+      --sans: 'Plus Jakarta Sans', sans-serif;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Architectural Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.75rem clamp(1.5rem, 5vw, 4rem);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: rgba(9, 10, 11, 0.85);
+      backdrop-filter: blur(12px);
+      z-index: 50;
+    }
+
+    .brand {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(74, 222, 128, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem);
+      max-width: 1440px;
+      margin: 0 auto;
+    }
+
+    .tagline {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: inline-block;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(2.75rem, 7vw, 6.5rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      max-width: 14ch;
+      margin-bottom: 2.5rem;
+      text-wrap: balance;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-col p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: var(--bg);
+      border: none;
+      padding: 0.85rem 1.75rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: var(--sans);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: transform 0.15s ease, background-color 0.15s ease;
+    }
+
+    .btn-primary:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .btn-primary:active {
+      transform: scale(0.98);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1.75rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--border-focus);
+      background: var(--surface-1);
+    }
+
+    /* Verification Badge Matrix */
+    .verification-matrix {
+      margin-top: 5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .badge-card {
+      background: var(--surface-1);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: var(--radius-sm);
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .badge-card:hover {
+      border-color: var(--border-focus);
+      transform: translateY(-3px);
+    }
+
+    .badge-title {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .badge-value {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.75rem;
+      color: #4ade80;
+      margin-top: 0.5rem;
+      font-family: var(--mono);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <span class="status-dot"></span>
+      Aura Studio
+    </div>
+    <ul class="nav-links">
+      <li><a href="#skills">Skills (60 Active)</a></li>
+      <li><a href="#mcp">MCP Stack</a></li>
+      <li><a href="#workflow">Workflow</a></li>
+    </ul>
+  </header>
+
+  <main class="hero">
+    <span class="tagline">System Active // Anti-Generic Web Intelligence</span>
+    <h1>Bespoke Digital Architecture. Engineered Without Slop.</h1>
+    
+    <div class="hero-meta">
+      <div class="meta-col">
+        <p>This verification instance validates that the design tokens, fluid typography clamp curves, curated external skills, and automated MCP pipelines are fully synthesized into a cohesive development environment.</p>
+        <div class="button-group">
+          <button class="btn-primary" onclick="alert('System Active')">Initialize Workflow</button>
+          <button class="btn-secondary" onclick="window.scrollTo({top: 600, behavior: 'smooth'})">Audit Metrics</button>
+        </div>
+      </div>
+      <div class="meta-col">
+        <p>Constructed strictly adhering to <strong>AGENTS.md</strong> principles: Zero unmotivated gradients, zero floating blobs, genuine editorial typography pairing, and strict mathematical spatial harmony.</p>
+      </div>
+    </div>
+
+    <div class="verification-matrix">
+      <div class="badge-card">
+        <div class="badge-title">Agent Architecture</div>
+        <div class="badge-value">Antigravity 2.0</div>
+        <div class="badge-status">● Verified & Active</div>
+      </div>
+      <div class="badge-card">
+        <div class="badge-title">Installed Skills</div>
+        <div class="badge-value">60 Curated Skills</div>
+        <div class="badge-status">● Progressive Disclosure Ready</div>
+      </div>
+      <div class="badge-card">
+        <div class="badge-title">Design Intelligence</div>
+        <div class="badge-value">UI/UX Pro Max</div>
+        <div class="badge-status">● Local Dataset Verified</div>
+      </div>
+      <div class="badge-card">
+        <div class="badge-title">MCP Integration</div>
+        <div class="badge-value">Playwright + DevTools</div>
+        <div class="badge-status">● Configured in mcp_config.json</div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+

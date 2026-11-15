@@ -1,14 +1,53 @@
+<div align="center">
+
+<!-- DYNAMIC ANIMATED CYBER AI BANNER -->
+<a href="https://paytm-lifeevent-ai.vercel.app">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,2&height=230&section=header&text=LifeEvent%20AI&fontSize=74&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=Autonomous%20Financial%20OS%20for%20Indian%20Medical%20Crises&descSize=19&descAlignY=62" width="100%" alt="LifeEvent AI Cyber Banner" />
+</a>
+
+<!-- MULTI-LINE ANIMATED TYPING SVG -->
+<a href="https://paytm-lifeevent-ai.vercel.app">
+  <img src="https://readme-typing-svg.demolab.com?font=Space+Grotesk&weight=700&size=24&duration=3200&pause=1000&color=00BAF2&center=true&vCenter=true&width=860&height=50&lines=🤖+Autonomous+AI+Financial+OS+for+Medical+Emergencies;🧠+LangGraph+Multi-Agent+Architecture+•+Gemini+2.0+Multimodal;⚡+Sub-Second+Paytm+UPI+Caution+Deposit+Rails;🛡️+100%25+Client-Side+Verhoeff+Aadhaar+Privacy+Masking;⚖️+Zero-Hallucination+IRDAI+2024+Room-Rent+Deduction+Math;🚀+Built+for+Paytm+❤️+AI+Hackathon+(BUILD+for+INDIA)" alt="LifeEvent AI Typing Banner" />
+</a>
+
+<p align="center">
+  <strong>One intelligent financial journey operating system unifying health insurance pre-authorizations, deterministic out-of-pocket gap calculations, and instant Paytm caution deposit rails when medical emergencies strike Indian families.</strong>
+</p>
+
+<!-- GLOWING DEVELOPER PILLS -->
+<p align="center">
+  <a href="https://paytm-lifeevent-ai.vercel.app"><img src="https://img.shields.io/badge/%F0%9F%9A%80_Live_Production-paytm--lifeevent--ai.vercel.app-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Live Site"></a>
+  <a href="https://github.com/sarangchaudhari635-oss/LifeEvent"><img src="https://img.shields.io/badge/%E2%9A%A1_GitHub_Repo-sarangchaudhari635--oss%2FLifeEvent-0a0a0a?style=for-the-badge&logo=github&logoColor=white" alt="Repo"></a>
+  <a href="https://paytm.com"><img src="https://img.shields.io/badge/Paytm_%E2%9D%A4%EF%B8%8F_AI-BUILD_for_INDIA_(Pune)-002E6E?style=for-the-badge&logo=paytm&logoColor=00BAF2" alt="Paytm Hackathon"></a>
+</p>
+
+<!-- TECH BADGES -->
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js_15.1-App_Router-black?style=flat-square&logo=next.js" alt="Next.js 15">
+  <img src="https://img.shields.io/badge/React_19-Concurrent-20232A?style=flat-square&logo=react&logoColor=61DAFB" alt="React 19">
+  <img src="https://img.shields.io/badge/Three.js-WebGL_Fluid_Shader-000000?style=flat-square&logo=threedotjs" alt="Three.js">
+  <img src="https://img.shields.io/badge/FastAPI-Python_3.11-009688?style=flat-square&logo=fastapi&logoColor=white" alt="FastAPI">
+  <img src="https://img.shields.io/badge/LangGraph-StateGraph_Agent-FF6F00?style=flat-square" alt="LangGraph">
+  <img src="https://img.shields.io/badge/Google_Gemini-2.0_Multimodal-4285F4?style=flat-square&logo=google" alt="Gemini">
+  <img src="https://img.shields.io/badge/Privacy-Verhoeff_Aadhaar_Masking-10B981?style=flat-square&logo=shield" alt="Verhoeff">
+  <img src="https://img.shields.io/badge/Compliance-IRDAI_2024_Master_Circular-7C3AED?style=flat-square" alt="IRDAI">
+</p>
+
+<p align="center">
+  <a href="#1-executive-summary"><b>📖 Architecture Overview</b></a> •
+  <a href="HACKATHON_README.md"><b>🏆 Hackathon Showcase</b></a> •
+  <a href="docs/DEMO_SCRIPT.md"><b>⏱️ 3-Min Pitch Script</b></a> •
+  <a href="docs/audit/DOCUMENTATION_INVENTORY.md"><b>📚 Master Documentation</b></a>
+</p>
+
+</div>
+
+---
+
 # LifeEvent AI
 
 > **AI-Powered Financial Journey Operating System**  
 > *Transforming life's most critical events into coordinated, evidence-backed financial actions.*
-
-[![Hackathon](https://img.shields.io/badge/Hackathon-Paytm_AI_Hackathon-002e6e?style=flat&logo=paytm)](https://paytm.com)
-[![Status](https://img.shields.io/badge/Architecture-Enterprise_Baseline_v2.0-emerald)](#)
-[![Compliance](https://img.shields.io/badge/Compliance-DPDP_Act_2023_%7C_IRDAI-blue)](#)
-[![AI](https://img.shields.io/badge/AI-Gemini_2.0_%2B_LangGraph-purple)](#)
-[![Backend](https://img.shields.io/badge/Backend-FastAPI_%2B_Supabase-009688)](#)
-[![Frontend](https://img.shields.io/badge/Frontend-Next.js_15_%2B_React_19-black)](#)
 
 ---
 
